@@ -3,7 +3,7 @@
 /**
  * main - entry point
  * @argc: number of argument
- * @argv: argument
+ * @argv: arguments
  * Description: entry point for stack options and execution
  * Return: 0
  */
