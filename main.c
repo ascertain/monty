@@ -25,14 +25,14 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		fprintf(2, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
 	m = fopen(argv[1], "r");
 	if (m == NULL)
 	{
-		printf("Error: Can't open file %s\n", argv[1]);
+		fprintf(2, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
 	fclose(m);
 
-	/* clean up stack after file is coled*/
+	/* clean up stack after file is closed*/
 	while (stack != NULL)
 	{
 		stack_t *tmp = stack;
@@ -91,7 +91,7 @@ void read_parse_exec(FILE *file, instruction_t *pair, stack_t **stack)
 			}
 			if (start->opcode == NULL)
 			{
-				printf("L%d: unknown instruction %s", line_number, start->opcode);
+				fprintf(2, "L%d: unknown instruction %s", line_number, start->opcode);
 				exit(EXIT_FAILURE);
 			}
 		}

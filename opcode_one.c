@@ -15,14 +15,14 @@ void _push(stack_t **stack, unsigned int line_number)
 	if (insert == NULL)
 	{
 		free(insert);
-		printf("Error: malloc failed");
+		fprintf(2, "Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
 
 	count_args = strtok(NULL, " \n");
 	if (count_args == NULL)
 	{
-		printf("L%d: usage: push integer", line_number);
+		fprintf(2, "L%d: usage push integer", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -67,7 +67,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 
 	if (start == NULL)
 	{
-		printf("L%d: can't pint, stack empty\n", line_number);
+		fprintf(2, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -86,7 +86,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 	if (*stack == NULL)
 	{
-		printf("L%d: can't pop an empty stack\n", line_number);
+		fprintf(2, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -110,7 +110,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 
 	if (*stack == NULL || tmp == NULL)
 	{
-		printf("L%d: can't swap, stack too short\n", line_number);
+		fprintf(2, "L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
