@@ -27,21 +27,12 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 
 	insert = malloc(sizeof(stack_t));
-	if (*stack == NULL)
-	{
-		insert->n = val;
-		insert->prev = NULL;
-		insert->next = NULL;
-		(*stack) = insert;
-	}
-	else
-	{
 		insert->n = val;
 		insert->prev = NULL;
 		insert->next = (*stack);
-		(*stack)->prev = insert;
+		if (*stack != NULL)
+			(*stack)->prev = insert;
 		(*stack) = insert;
-	}
 }
 
 /**
