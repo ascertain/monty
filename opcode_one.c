@@ -20,12 +20,12 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 
 	val = atoi(count_args);
-	if (val == 0 && count_args[0] != '0')
+/*	if (val == 0 && count_args[0] != '0')
 	{
                 fprintf(stderr, "L%d: usage push integer", line_number);
                 exit(EXIT_FAILURE);
 	}
-
+*/
 	insert = malloc(sizeof(stack_t));
 		insert->n = val;
 		insert->prev = NULL;
