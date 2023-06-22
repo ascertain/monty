@@ -15,21 +15,21 @@ void _push(stack_t **stack, unsigned int line_number)
 	count_args = strtok(NULL, " \n");
 	if (count_args == NULL)
 	{
-		fprintf(stderr, "L%d: usage push integer", line_number);
+		fprintf(stderr, "L%d: usage push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
 	val = atoi(count_args);
 	if (val == 0 && count_args[0] != '0')
 	{
-                fprintf(stderr, "L%d: usage push integer", line_number);
+                fprintf(stderr, "L%d: usage push integer\n", line_number);
                 exit(EXIT_FAILURE);
 	}
 
 	insert = malloc(sizeof(stack_t));
 	if (insert == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
