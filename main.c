@@ -69,8 +69,6 @@ void read_parse_exec(FILE *file, instruction_t *pair, stack_t **stack)
 		char *opcode_tok;
 		int size;
 
-		line_number++;
-
 		size = strlen(inpt);
 		if (size > 0 && inpt[size - 1] == '\n')
 			inpt[size - 1] = '\0';
@@ -95,6 +93,8 @@ void read_parse_exec(FILE *file, instruction_t *pair, stack_t **stack)
 				exit(EXIT_FAILURE);
 			}
 		}
+
+		line_number++;
 	}
 }
 

@@ -1,7 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define NUM 100
+#define NUM 1024
 #define _GNU_SOURCE
 
 #include <stdio.h>

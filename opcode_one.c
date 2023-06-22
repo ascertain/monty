@@ -10,14 +10,7 @@ void _push(stack_t **stack, unsigned int line_number)
 {
 	char *count_args;
 	int val;
-	stack_t *insert = malloc(sizeof(stack_t));
-
-	if (insert == NULL)
-	{
-		free(insert);
-		fprintf(stderr, "Error: malloc failed");
-		exit(EXIT_FAILURE);
-	}
+	stack_t *insert;
 
 	count_args = strtok(NULL, " \n");
 	if (count_args == NULL)
@@ -28,14 +21,21 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	val = atoi(count_args);
 
-	insert->n = val;
-	insert->prev = NULL;
-	insert->next = (*stack);
-
-	if ((*stack) != NULL)
-		(*stack)->prev = insert;
-
-	(*stack) = insert;
+	insert = malloc(sizeof(stack_t));
+	if (*stack == NULL)
+	{
+		insert->n = val;
+		insert->prev = NULL;
+		insert->next = NULL;
+		(*stack) = insert;
+	}
+	else
+	{
+		insert->n = val;
+		insert->prev = NULL;
+		insert->next = (*stack);
+		(*stack) = insert;
+	}
 }
 
 /**
@@ -63,15 +63,17 @@ void _pall(stack_t **stack, unsigned int line_number)
  */
 void _pint(stack_t **stack, unsigned int line_number)
 {
-	stack_t *start = *stack;
+	stack_t *start;
 
-	if (start == NULL)
+	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	else
-		printf("%d\n", start->n);
+
+	start = *stack;
+
+	printf("%d\n", start->n);
 
 }
 
@@ -82,18 +84,16 @@ void _pint(stack_t **stack, unsigned int line_number)
  */
 void _pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *start = *stack;
+	stack_t *start;
 
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	start = *stack;
 
-	*stack = start->next;
-
-	if (*stack != NULL)
-		start->next->prev = NULL;
+	*stack = (*stack)->next;
 
 	free(start);
 }
@@ -105,14 +105,16 @@ void _pop(stack_t **stack, unsigned int line_number)
  */
 void _swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp = (*stack)->next;
+	stack_t *tmp;
 	int hold;
 
-	if (*stack == NULL || tmp == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+
+	tmp = (*stack)->next;
 
 	hold = (*stack)->n;
 	(*stack)->n = tmp->n;
